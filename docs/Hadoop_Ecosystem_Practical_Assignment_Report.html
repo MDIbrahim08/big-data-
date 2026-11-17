@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Practical Assignment on Hadoop Ecosystem - Mohammed Ibrahim</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+    @bottom-right {
+      content: "Page " counter(page);
+      font-size: 10px;
+      color: #64748b;
+    }
+  }
+  body {
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    line-height: 1.5;
+    background-color: #ffffff;
+    font-size: 12.5px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Mandatory Submission Header Card */
+  .submission-header {
+    border: 2.5px solid #1e3a8a;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+  .inst-title {
+    color: #1e3a8a;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 0 0 4px 0;
+  }
+  .dept-title {
+    color: #0369a1;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 14px 0;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+  }
+  .assign-banner {
+    background: #1e3a8a;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .student-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+  }
+  .detail-row {
+    display: flex;
+    align-items: baseline;
+  }
+  .detail-label {
+    font-weight: 700;
+    color: #334155;
+    width: 145px;
+    flex-shrink: 0;
+  }
+  .detail-value {
+    color: #0f172a;
+    font-weight: 600;
+  }
+  .highlight-val {
+    color: #1e3a8a;
+    font-weight: 800;
+  }
+
+  /* Program Sections */
+  .program-card {
+    page-break-inside: avoid;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: #ffffff;
+  }
+  .program-header {
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 6px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .program-num-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e3a8a;
+  }
+  .tool-tag {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .section-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 10px 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  p {
+    margin: 3px 0 6px 0;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 9px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin: 6px 0 10px 0;
+    border-left: 4px solid #2563eb;
+  }
+  .screenshot-block {
+    text-align: center;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .screenshot-block img {
+    max-width: 98%;
+    max-height: 400px;
+    border: 1.5px solid #64748b;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  }
+  .screenshot-caption {
+    font-size: 11px;
+    color: #334155;
+    font-weight: 600;
+    margin-top: 5px;
+    background: #f1f5f9;
+    padding: 3px 8px;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  .explanation-card {
+    background: #f8fafc;
+    border-left: 3.5px solid #0284c7;
+    padding: 8px 14px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .explanation-card ul {
+    margin: 3px 0;
+    padding-left: 18px;
+  }
+  .explanation-card li {
+    margin-bottom: 4px;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= MANDATORY SUBMISSION HEADER ================= -->
+<div class="submission-header">
+  <div class="inst-title">Chanakya University</div>
+  <div class="dept-title">School of Engineering &bull; Department of Computer Science &amp; Data Science</div>
+  
+  <div class="assign-banner">Practical Assignment on Hadoop Ecosystem</div>
+  
+  <div class="student-details-grid">
+    <div class="detail-row">
+      <span class="detail-label">Name:</span>
+      <span class="detail-value highlight-val">MD Ibrahim</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Register Number:</span>
+      <span class="detail-value highlight-val">CU23BCA0035A</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Course:</span>
+      <span class="detail-value">Big Data Analytics</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Course Code:</span>
+      <span class="detail-value">BDA301 / CSA305</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Program:</span>
+      <span class="detail-value">BCA (Honours) - Data Science</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Semester:</span>
+      <span class="detail-value">4th Year, Semester VII (7th Semester)</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Assignment Title:</span>
+      <span class="detail-value">Practical Assignment on Hadoop Ecosystem</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Environment:</span>
+      <span class="detail-value">Cloudera QuickStart VM (CentOS 6.7, Hadoop 2.6.0)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PROGRAM 1 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 1: Hadoop Distributed File System (HDFS) File Operations</span>
+    <span class="tool-tag">HDFS CLI</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Perform the following HDFS commands as specified in the assignment:</p>
+  <ul>
+    <li><strong>i)</strong> Copy file from local file system to a directory in HDFS without using <code>copyFromLocal</code> (using <code>-put</code>).</li>
+    <li><strong>ii)</strong> Copy file from HDFS to a directory in local file system without using <code>copyToLocal</code> (using <code>-get</code>).</li>
+    <li><strong>iii)</strong> Copy a file from one HDFS directory to another HDFS directory (using <code>-cp</code>).</li>
+    <li><strong>iv)</strong> Move a file from one HDFS directory to another HDFS directory (using <code>-mv</code>).</li>
+  </ul>
+  
+  <div class="section-label">2. Commands Executed in Cloudera Terminal</div>
+  <pre># Create a local test file
+echo "Hadoop Ecosystem Lab - Mohammed Ibrahim" > sample_data.txt
+cat sample_data.txt
+
+# Create testing directories in HDFS
+hdfs dfs -mkdir -p /user/cloudera/dir_source
+hdfs dfs -mkdir -p /user/cloudera/dir_target
+
+# (i) Copy from local to HDFS using -put
+hdfs dfs -put sample_data.txt /user/cloudera/dir_source/
+hdfs dfs -ls /user/cloudera/dir_source/
+hdfs dfs -cat /user/cloudera/dir_source/sample_data.txt
+
+# (ii) Copy from HDFS to local using -get
+rm -f sample_data.txt
+hdfs dfs -get /user/cloudera/dir_source/sample_data.txt ./downloaded_from_hdfs.txt
+ls -l downloaded_from_hdfs.txt
+cat downloaded_from_hdfs.txt
+
+# (iii) Copy within HDFS using -cp
+hdfs dfs -cp /user/cloudera/dir_source/sample_data.txt /user/cloudera/dir_target/
+hdfs dfs -ls /user/cloudera/dir_source/
+hdfs dfs -ls /user/cloudera/dir_target/
+
+# (iv) Move within HDFS using -mv
+hdfs dfs -mkdir -p /user/cloudera/dir_moved
+hdfs dfs -mv /user/cloudera/dir_target/sample_data.txt /user/cloudera/dir_moved/
+hdfs dfs -ls /user/cloudera/dir_target/
+hdfs dfs -ls /user/cloudera/dir_moved/</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q1_hdfs_put_get.jpg" alt="HDFS Put and Get Screenshot">
+    <div class="screenshot-caption">Screenshot 1.1: Verification of HDFS put and get operations without copyFromLocal/copyToLocal</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q1_hdfs_cp.jpg" alt="HDFS Copy Screenshot">
+    <div class="screenshot-caption">Screenshot 1.2: Verification of hdfs dfs -cp copying file between HDFS directories</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q1_hdfs_mv.jpg" alt="HDFS Move Screenshot">
+    <div class="screenshot-caption">Screenshot 1.3: Verification of hdfs dfs -mv atomically moving file across HDFS directories</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshots 1.1, 1.2, and 1.3:</strong>
+    <ul>
+      <li><strong>Explanation of Screenshot 1.1:</strong> Demonstrates sub-tasks (i) and (ii). <code>hdfs dfs -put sample_data.txt /user/cloudera/dir_source/</code> uploads the file into the distributed filesystem without using <code>copyFromLocal</code>. The output confirms the block was written with size 40 bytes. Then, the original local file is deleted using <code>rm -f</code>, and <code>hdfs dfs -get</code> successfully retrieves the file back into local Linux storage as <code>downloaded_from_hdfs.txt</code>. Running <code>cat</code> proves the file content remains identical (<em>"Hadoop Ecosystem Lab - Mohammed Ibrahim"</em>).</li>
+      <li><strong>Explanation of Screenshot 1.2:</strong> Demonstrates sub-task (iii). The command <code>hdfs dfs -cp /user/cloudera/dir_source/sample_data.txt /user/cloudera/dir_target/</code> replicates the file within HDFS across directories. Executing <code>hdfs dfs -ls</code> on both <code>dir_source</code> and <code>dir_target</code> confirms that the file now simultaneously exists in both HDFS paths.</li>
+      <li><strong>Explanation of Screenshot 1.3:</strong> Demonstrates sub-task (iv). The command <code>hdfs dfs -mv /user/cloudera/dir_target/sample_data.txt /user/cloudera/dir_moved/</code> performs an atomic namespace relocation. The terminal output of <code>hdfs dfs -ls /user/cloudera/dir_target/</code> shows 0 items (directory is empty), while <code>/user/cloudera/dir_moved/</code> contains the 40-byte <code>sample_data.txt</code>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 2 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 2: MapReduce Program to Find Maximum Temperature in Each Year</span>
+    <span class="tool-tag">MapReduce / Python Streaming</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Develop and execute a distributed MapReduce program using Hadoop Streaming to parse meteorological observation logs and compute the maximum recorded temperature for each calendar year.</p>
+
+  <div class="section-label">2. Source Code &amp; Execution Commands</div>
+  <pre># mapper.py
+import sys
+for line in sys.stdin:
+    line = line.strip()
+    if line:
+        parts = line.split()
+        if len(parts) >= 5:
+            year = parts[0]
+            temperature = int(parts[4])
+            print "%s\t%s" % (year, temperature)
+
+# reducer.py
+import sys
+current_year = None
+max_temp = -9999
+for line in sys.stdin:
+    line = line.strip()
+    if line:
+        year, temp = line.split('\t')
+        temp = int(temp)
+        if current_year == year:
+            if temp > max_temp:
+                max_temp = temp
+        else:
+            if current_year:
+                print "%s\t%d" % (current_year, max_temp)
+            current_year = year
+            max_temp = temp
+if current_year:
+    print "%s\t%d" % (current_year, max_temp)
+
+# Distributed Execution via Hadoop Streaming:
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+  -input /user/cloudera/temp_input/temperature_data.txt \
+  -output /user/cloudera/temp_output \
+  -mapper mapper.py -file mapper.py \
+  -reducer reducer.py -file reducer.py
+
+# Inspect results:
+hdfs dfs -cat /user/cloudera/temp_output/part-00000</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q2_mr_local_test.jpg" alt="MapReduce Local Execution">
+    <div class="screenshot-caption">Screenshot 2.1: Python mapper and reducer test verification in Unix stream pipeline</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q2_mr_streaming_output.jpg" alt="MapReduce Streaming Output">
+    <div class="screenshot-caption">Screenshot 2.2: Distributed YARN MapReduce job counter metrics and HDFS output</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshots 2.1 and 2.2:</strong>
+    <ul>
+      <li><strong>Explanation of Screenshot 2.1:</strong> Displays the initial logic test of <code>mapper.py</code> and <code>reducer.py</code> via standard Unix pipes (<code>cat temperature_data.txt | ./mapper.py | sort | ./reducer.py</code>). The pipeline correctly filters observation rows and computes candidate annual maximums: <code>1901: 32</code>, <code>1902: 41</code>, <code>1903: 31</code>, and <code>1904: 45</code>.</li>
+      <li><strong>Explanation of Screenshot 2.2:</strong> Shows the completed execution of the distributed MapReduce streaming job on the YARN cluster. The terminal details the job counters: <em>"Reduce output records = 4"</em>, <em>"Spilled Records = 24"</em>, and <em>"Bytes Written = 32"</em>. The final command <code>hdfs dfs -cat /user/cloudera/temp_output/part-00000</code> reads the distributed part file directly from HDFS, validating that the annual maximum temperature calculations executed across the cluster with complete numerical precision.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 3 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 3: Load File from Local to Hive and Hive Back to Local</span>
+    <span class="tool-tag">Apache Hive / HQL</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Create a structured relational table in Apache Hive, load structured comma-separated data from the local Linux operating system filesystem into the Hive table, and export table records back into a local filesystem directory.</p>
+
+  <div class="section-label">2. HiveQL Commands Executed</div>
+  <pre>CREATE DATABASE IF NOT EXISTS lab_db;
+USE lab_db;
+
+-- 1. Create Employee Table
+CREATE TABLE IF NOT EXISTS employee (
+    id INT,
+    name STRING,
+    salary DOUBLE,
+    dept STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+-- 2. Load Local Data File into Hive Table
+LOAD DATA LOCAL INPATH '/home/cloudera/emp_data.txt' INTO TABLE employee;
+
+-- 3. Query and Verify Ingested Records
+SELECT * FROM employee;
+
+-- 4. Export Table Data to Local Directory
+INSERT OVERWRITE LOCAL DIRECTORY '/home/cloudera/hive_export'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT * FROM employee;</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q3_hive_create_load.jpg" alt="Hive Table Creation and Load">
+    <div class="screenshot-caption">Screenshot 3.1: Hive DDL execution, LOAD DATA LOCAL INPATH, and SELECT verification</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q3_hive_export_cat.jpg" alt="Hive Export Verification">
+    <div class="screenshot-caption">Screenshot 3.2: Exported CSV file in local directory (~/hive_export/000000_0) verified via Linux cat</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshots 3.1 and 3.2:</strong>
+    <ul>
+      <li><strong>Explanation of Screenshot 3.1:</strong> Shows the creation of the Hive managed table <code>employee</code> with columns <code>id INT, name STRING, salary DOUBLE, dept STRING</code> delimited by commas. Executing <code>LOAD DATA LOCAL INPATH '/home/cloudera/emp_data.txt' INTO TABLE employee;</code> copies the raw file into HDFS under the Hive warehouse directory (<code>/user/hive/warehouse/lab_db.db/employee</code>). The subsequent <code>SELECT * FROM employee;</code> returns all 5 employee records (John, Alice, Bob, Charlie, David) populated into the schema.</li>
+      <li><strong>Explanation of Screenshot 3.2:</strong> Displays the output of <code>INSERT OVERWRITE LOCAL DIRECTORY '/home/cloudera/hive_export'</code>. In the Linux shell, running <code>ls -l ~/hive_export/</code> reveals part file <code>000000_0</code>. Executing <code>cat ~/hive_export/*</code> prints the comma-delimited records back onto the local terminal, proving successful round-trip data migration from Local &rarr; Hive &rarr; Local.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 4 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 4: Hive DDL Operations, Schema Alteration, and Complex Queries</span>
+    <span class="tool-tag">HiveQL / Aggregations</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Perform Data Definition Language (DDL) operations on Hive tables including schema alteration (adding columns), structure inspection, and executing analytical queries using <code>WHERE</code>, <code>ORDER BY</code>, and <code>GROUP BY</code> clauses.</p>
+
+  <div class="section-label">2. HiveQL Commands Executed</div>
+  <pre>USE lab_db;
+
+-- 1. Alter Schema: Add 'location' column to employee table
+ALTER TABLE employee ADD COLUMNS (location STRING);
+
+-- 2. Inspect Updated Table Schema
+DESCRIBE employee;
+
+-- 3. Filter Query: High earners (Salary > 6000)
+SELECT * FROM employee WHERE salary > 6000;
+
+-- 4. Sort Query: Sort employees by salary descending
+SELECT id, name, salary, dept FROM employee ORDER BY salary DESC;
+
+-- 5. Aggregation Query: Headcount and Average Salary per Department
+SELECT dept, COUNT(*) AS emp_count, AVG(salary) AS avg_salary 
+FROM employee 
+GROUP BY dept;</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q4_hive_ddl_queries.jpg" alt="Hive DDL Alter and Queries Screenshot">
+    <div class="screenshot-caption">Screenshot 4.1: ALTER TABLE execution, DESCRIBE schema output, and analytical query results</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 4.1:</strong>
+    <ul>
+      <li><strong>Schema Evolution:</strong> The command <code>ALTER TABLE employee ADD COLUMNS (location STRING);</code> alters the Hive Metastore relational catalog. Running <code>DESCRIBE employee;</code> confirms that column <code>location</code> of type <code>string</code> has been appended to the schema without requiring table truncation.</li>
+      <li><strong>Filtering (<code>WHERE salary > 6000</code>):</strong> Filters out lower earners and accurately outputs employees earning above 6000: <code>Alice (7000.0)</code>, <code>Charlie (9000.0)</code>, and <code>David (6200.0)</code>.</li>
+      <li><strong>Sorting (<code>ORDER BY salary DESC</code>):</strong> Executes a MapReduce reducer sort that returns rows ranked in descending salary order: Charlie (9000.0), Alice (7000.0), David (6200.0), John (5000.0), and Bob (4500.0).</li>
+      <li><strong>Aggregation (<code>GROUP BY dept</code>):</strong> Triggers distributed aggregations displaying accurate department-level statistics:
+        <ul>
+          <li><strong>IT:</strong> Count = 2, Average Salary = 8000.0</li>
+          <li><strong>HR:</strong> Count = 1, Average Salary = 5000.0</li>
+          <li><strong>Sales:</strong> Count = 1, Average Salary = 4500.0</li>
+          <li><strong>Finance:</strong> Count = 1, Average Salary = 6200.0</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 5 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 5: Performance Optimization via Hive Partitioning and Bucketing</span>
+    <span class="tool-tag">Hive Optimization / HDFS</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Demonstrate Hive query optimization mechanisms by creating a <strong>Partitioned Table</strong> (segregating data by department into separate subdirectories) and a <strong>Bucketed Table</strong> (clustering data based on hash values of employee ID into distinct bucket files).</p>
+
+  <div class="section-label">2. HiveQL &amp; HDFS Commands Executed</div>
+  <pre>USE lab_db;
+
+-- 1. Create and Populate Partitioned Table
+CREATE TABLE IF NOT EXISTS emp_part (
+    id INT, name STRING, salary DOUBLE
+)
+PARTITIONED BY (dept STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+
+SET hive.exec.dynamic.partition = true;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+INSERT OVERWRITE TABLE emp_part PARTITION(dept)
+SELECT id, name, salary, dept FROM employee;
+
+SHOW PARTITIONS emp_part;
+SELECT * FROM emp_part WHERE dept = 'IT';
+
+-- 2. Create and Populate Bucketed Table
+CREATE TABLE IF NOT EXISTS emp_buck (
+    id INT, name STRING, salary DOUBLE, dept STRING
+)
+CLUSTERED BY (id) INTO 3 BUCKETS
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
+
+SET hive.enforce.bucketing = true;
+
+INSERT OVERWRITE TABLE emp_buck
+SELECT id, name, salary, dept FROM employee;
+
+-- 3. Verify Bucket Files in HDFS
+hdfs dfs -ls /user/hive/warehouse/lab_db.db/emp_buck/</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q5_hive_partitions.jpg" alt="Hive Partitions Verification">
+    <div class="screenshot-caption">Screenshot 5.1: SHOW PARTITIONS output and isolated partition pruning query for dept='IT'</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q5_hive_buckets.jpg" alt="Hive Bucketing Verification">
+    <div class="screenshot-caption">Screenshot 5.2: Verification of exactly 3 hash-bucketed files (000000_0, 000001_0, 000002_0) in HDFS</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshots 5.1 and 5.2:</strong>
+    <ul>
+      <li><strong>Explanation of Screenshot 5.1 (Partitioning):</strong> Dynamic partitioning created four discrete HDFS subdirectories: <code>dept=Finance</code>, <code>dept=HR</code>, <code>dept=IT</code>, and <code>dept=Sales</code>. Running <code>SHOW PARTITIONS emp_part;</code> lists all four partitions. The query <code>SELECT * FROM emp_part WHERE dept='IT';</code> reads solely from the <code>dept=IT</code> HDFS folder, returning Alice and Charlie while completely pruning away all other department folders, optimizing scan efficiency.</li>
+      <li><strong>Explanation of Screenshot 5.2 (Bucketing):</strong> The table <code>emp_buck</code> was configured with <code>CLUSTERED BY (id) INTO 3 BUCKETS</code>. The HDFS listing command <code>hdfs dfs -ls /user/hive/warehouse/lab_db.db/emp_buck/</code> shows three distinct part files: <code>000000_0</code> (45 bytes), <code>000001_0</code> (21 bytes), and <code>000002_0</code> (41 bytes). Records are placed into buckets based on <code>hash(id) % 3</code>, enabling rapid map-side joins.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 6 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 6: Data Ingestion from RDBMS (MySQL) to Hive using Apache Sqoop</span>
+    <span class="tool-tag">Data Ingestion / Sqoop Import</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Perform an automated Sqoop import operation to transfer structured relational data from a MySQL database table (<code>retail_db.customers</code>) into Hadoop and create a corresponding managed table in Apache Hive.</p>
+
+  <div class="section-label">2. Execution Commands</div>
+  <pre>-- 1. MySQL Preparation
+mysql -u root -pcloudera -e "
+CREATE DATABASE IF NOT EXISTS retail_db;
+USE retail_db;
+DROP TABLE IF EXISTS customers;
+CREATE TABLE customers (
+    cust_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    city VARCHAR(50)
+);
+INSERT INTO customers VALUES 
+(1, 'Mohammed', 'Bangalore'),
+(2, 'Ibrahim', 'Bellary'),
+(3, 'Rahul', 'Mysore');
+SELECT * FROM customers;"
+
+-- 2. Execute Sqoop Import to Hive Table
+sqoop import \
+  --connect jdbc:mysql://localhost/retail_db \
+  --username root \
+  --password cloudera \
+  --table customers \
+  --hive-import \
+  --hive-table lab_db.imported_customers \
+  --create-hive-table \
+  -m 1
+
+-- 3. Verify in Hive
+hive -e "USE lab_db; SELECT * FROM imported_customers;"</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q6_sqoop_import.jpg" alt="Sqoop Import to Hive Screenshot">
+    <div class="screenshot-caption">Screenshot 6.1: Sqoop import completion and Hive query verification of imported MySQL records</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 6.1:</strong>
+    <ul>
+      <li><strong>Sqoop Execution:</strong> Sqoop connects to the MySQL instance via JDBC, inspects the table metadata of <code>retail_db.customers</code>, and generates an internal MapReduce job using 1 mapper (<code>-m 1</code>).</li>
+      <li><strong>Hive Integration:</strong> Using <code>--hive-import</code> and <code>--create-hive-table</code>, Sqoop automatically generates the table schema in Hive metastore (<code>lab_db.imported_customers</code>) and loads the HDFS output directly into the table warehouse path.</li>
+      <li><strong>Result Verification:</strong> The terminal output of <code>hive -e "USE lab_db; SELECT * FROM imported_customers;"</code> confirms that all 3 customer rows (1: Mohammed - Bangalore, 2: Ibrahim - Bellary, 3: Rahul - Mysore) are successfully ingested into Hive.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PROGRAM 7 ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Program 7: Data Export from Hadoop/Hive to RDBMS (MySQL) using Apache Sqoop</span>
+    <span class="tool-tag">Data Egress / Sqoop Export</span>
+  </div>
+  
+  <div class="section-label">1. Problem Statement &amp; Objective</div>
+  <p>Export processed data stored in an HDFS directory / Hive managed table (<code>lab_db.employee</code>) back into an external relational database table in MySQL using Apache Sqoop export.</p>
+
+  <div class="section-label">2. Execution Commands</div>
+  <pre>-- 1. Create Target Destination Table in MySQL
+mysql -u root -pcloudera -e "
+USE retail_db;
+DROP TABLE IF EXISTS exported_employees;
+CREATE TABLE exported_employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    salary DOUBLE,
+    dept VARCHAR(50)
+);
+DESCRIBE exported_employees;"
+
+-- 2. Execute Sqoop Export Job
+sqoop export \
+  --connect jdbc:mysql://localhost/retail_db \
+  --username root \
+  --password cloudera \
+  --table exported_employees \
+  --export-dir /user/hive/warehouse/lab_db.db/employee \
+  --input-fields-terminated-by ',' \
+  -m 1
+
+-- 3. Verify Exported Data in MySQL
+mysql -u root -pcloudera -e "
+USE retail_db; 
+SELECT * FROM exported_employees;"</pre>
+
+  <div class="section-label">3. Terminal Screenshots &amp; Clear Step-by-Step Explanation</div>
+  
+  <div class="screenshot-block">
+    <img src="screenshots/q7_sqoop_export_job.jpg" alt="Sqoop Export Job Execution Screenshot">
+    <div class="screenshot-caption">Screenshot 7.1: Sqoop export job counters confirming "Exported 5 records" via MapReduce task</div>
+  </div>
+
+  <div class="screenshot-block">
+    <img src="screenshots/q7_sqoop_export_mysql.jpg" alt="MySQL Export Verification Screenshot">
+    <div class="screenshot-caption">Screenshot 7.2: MySQL verification: SELECT query on retail_db.exported_employees showing all 5 rows populated</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshots 7.1 and 7.2:</strong>
+    <ul>
+      <li><strong>Explanation of Screenshot 7.1:</strong> Shows the completion of the Sqoop export MapReduce job. The counters report <em>"Exported 5 records"</em> and <em>"Map input records = 5"</em>, indicating that all rows from <code>/user/hive/warehouse/lab_db.db/employee</code> were parsed and translated into SQL insert queries.</li>
+      <li><strong>Explanation of Screenshot 7.2:</strong> Directly queries MySQL using <code>mysql -u root -pcloudera -e "USE retail_db; SELECT * FROM exported_employees;"</code>. The tabular output confirms that all 5 employee records (101: John, 102: Alice, 103: Bob, 104: Charlie, 105: David) were transferred accurately into the relational MySQL database.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= CONCLUSION ================= -->
+<div class="program-card" style="margin-top: 15px;">
+  <div class="program-header">
+    <span class="program-num-title">Conclusion &amp; Summary of Learning Outcomes</span>
+    <span class="tool-tag">Summary</span>
+  </div>
+  <p>All seven assigned practical programs on the Hadoop Ecosystem were executed and verified within the Cloudera QuickStart virtual environment:</p>
+  <ul>
+    <li>Mastered low-level distributed storage manipulation via the <strong>HDFS CLI</strong> (<code>-put</code>, <code>-get</code>, <code>-cp</code>, <code>-mv</code>).</li>
+    <li>Implemented distributed computation using <strong>Hadoop Streaming MapReduce</strong> in Python to calculate meteorological extremes.</li>
+    <li>Performed end-to-end data warehousing and analytical SQL with <strong>Apache Hive</strong>, demonstrating schema evolution and query optimization through <strong>Partitioning</strong> and <strong>Bucketing</strong>.</li>
+    <li>Achieved bidirectional RDBMS-Hadoop ETL data exchange using <strong>Apache Sqoop</strong> for high-throughput imports and exports with MySQL.</li>
+  </ul>
+</div>
+
+</body>
+</html>
+

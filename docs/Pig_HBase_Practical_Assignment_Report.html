@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Practical Assignment on Pig and HBase Tools - MD Ibrahim</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+    @bottom-right {
+      content: "Page " counter(page);
+      font-size: 10px;
+      color: #64748b;
+    }
+  }
+  body {
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    line-height: 1.5;
+    background-color: #ffffff;
+    font-size: 12.5px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Mandatory Submission Header Card */
+  .submission-header {
+    border: 2.5px solid #0f766e;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+  .inst-title {
+    color: #0f766e;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 0 0 4px 0;
+  }
+  .dept-title {
+    color: #0284c7;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 14px 0;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+  }
+  .assign-banner {
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .student-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    background: #f0fdfa;
+    border: 1px solid #ccfbf1;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+  }
+  .detail-row {
+    display: flex;
+    align-items: baseline;
+  }
+  .detail-label {
+    font-weight: 700;
+    color: #134e4a;
+    width: 145px;
+    flex-shrink: 0;
+  }
+  .detail-value {
+    color: #0f172a;
+    font-weight: 600;
+  }
+  .highlight-val {
+    color: #0f766e;
+    font-weight: 800;
+  }
+
+  /* Program Sections */
+  .program-card {
+    page-break-inside: avoid;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background: #ffffff;
+  }
+  .program-header {
+    border-bottom: 2px solid #0d9488;
+    padding-bottom: 6px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .program-num-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f766e;
+  }
+  .tool-tag {
+    background: #f0fdfa;
+    border: 1px solid #99f6e4;
+    color: #0f766e;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .sub-question {
+    background: #f8fafc;
+    border-left: 3px solid #0284c7;
+    padding: 6px 12px;
+    margin: 12px 0 6px 0;
+    font-weight: 700;
+    font-size: 13px;
+    color: #0369a1;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+    margin: 8px 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  p {
+    margin: 3px 0 6px 0;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 9px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin: 6px 0 10px 0;
+    border-left: 4px solid #0d9488;
+  }
+  .screenshot-block {
+    text-align: center;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+  .screenshot-block img {
+    max-width: 98%;
+    max-height: 400px;
+    border: 1.5px solid #64748b;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  }
+  .screenshot-caption {
+    font-size: 11px;
+    color: #334155;
+    font-weight: 600;
+    margin-top: 5px;
+    background: #f1f5f9;
+    padding: 3px 8px;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  .explanation-card {
+    background: #f8fafc;
+    border-left: 3.5px solid #0284c7;
+    padding: 8px 14px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .explanation-card ul {
+    margin: 3px 0;
+    padding-left: 18px;
+  }
+  .explanation-card li {
+    margin-bottom: 4px;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= MANDATORY SUBMISSION HEADER ================= -->
+<div class="submission-header">
+  <div class="inst-title">Chanakya University</div>
+  <div class="dept-title">School of Engineering &bull; Department of Computer Science &amp; Data Science</div>
+  
+  <div class="assign-banner">Practical Assignment on Pig and HBase Tools</div>
+  
+  <div class="student-details-grid">
+    <div class="detail-row">
+      <span class="detail-label">Name:</span>
+      <span class="detail-value highlight-val">MD Ibrahim</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Register Number:</span>
+      <span class="detail-value highlight-val">CU23BCA0035A</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Course:</span>
+      <span class="detail-value">Big Data Analytics</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Course Code:</span>
+      <span class="detail-value">BDA301 / CSA305</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Program:</span>
+      <span class="detail-value">BCA (Honours) - Data Science</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Semester:</span>
+      <span class="detail-value">4th Year, Semester VII (7th Semester)</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Assignment Title:</span>
+      <span class="detail-value">Practical Assignment on Pig and HBase Tools</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Submission Date:</span>
+      <span class="detail-value">28th November 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PART 1: APACHE PIG ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Question 1: Apache Pig Scripts on Employee Database</span>
+    <span class="tool-tag">Apache Pig / Grunt Shell</span>
+  </div>
+  
+  <p><strong>Objective:</strong> Perform distributed data flow transformations, filtering, projections, arithmetic modifications, and sorting on an employee dataset using Pig Latin scripts in the Grunt shell.</p>
+
+  <div class="section-label">Initial Employee Dataset Created:</div>
+  <pre>101,John,5000,HR
+102,Alice,7000,IT
+103,Bob,4500,Sales
+104,Charlie,9000,IT
+105,David,6200,Finance
+106,Emma,8500,IT
+107,Frank,5200,Sales</pre>
+
+  <!-- 1a -->
+  <div class="sub-question">1a. Load and Store Employee Database on Pig</div>
+  <pre>-- Load CSV dataset from HDFS into Pig relation
+emp = LOAD '/user/cloudera/pig_input/pig_employee.txt' 
+      USING PigStorage(',') 
+      AS (id:int, name:chararray, salary:double, dept:chararray);
+
+-- Store transformed relation into HDFS directory
+STORE emp INTO '/user/cloudera/pig_output_stored' USING PigStorage(',');</pre>
+  
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1a_load_store.jpg" alt="Pig Load and Store Screenshot">
+    <div class="screenshot-caption">Screenshot 1.1: Verification of Pig STORE execution (7 records written to /user/cloudera/pig_output_stored)</div>
+  </div>
+  
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.1:</strong>
+    Shows the successful completion of the Pig MapReduce job for <code>STORE emp INTO '/user/cloudera/pig_output_stored'</code>. Pig compiled the Pig Latin script into a map-only job (<code>MAP_ONLY</code>) on YARN. The counters confirm: <em>"Successfully read 7 records (526 bytes) from /user/cloudera/pig_input/pig_employee.txt"</em> and <em>"Successfully stored 7 records (149 bytes) in /user/cloudera/pig_output_stored"</em> with zero spill count.
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 1b -->
+  <div class="sub-question">1b. View Id and Salary of Each Employee</div>
+  <pre>b_proj = FOREACH emp GENERATE id, salary;
+DUMP b_proj;</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1b_id_salary.jpg" alt="Pig Projection Id and Salary Screenshot">
+    <div class="screenshot-caption">Screenshot 1.2: Pig DUMP output displaying projected tuples (id, salary) for all employees</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.2:</strong>
+    The <code>FOREACH ... GENERATE id, salary</code> operator projects only the <code>id</code> and <code>salary</code> columns, discarding the name and department fields. The <code>DUMP</code> statement executes the underlying MapReduce pipeline, yielding all 7 projected tuples: <code>(101,5000.0)</code>, <code>(102,7000.0)</code>, <code>(103,4500.0)</code>, <code>(104,9000.0)</code>, <code>(105,6200.0)</code>, <code>(106,8500.0)</code>, and <code>(107,5200.0)</code>.
+  </div>
+
+  <!-- 1c -->
+  <div class="sub-question">1c. View Employee Details Who Are Drawing Salary &gt; 5000</div>
+  <pre>c_high_salary = FILTER emp BY salary > 5000;
+DUMP c_high_salary;</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1c_filter_salary_5000.jpg" alt="Pig Filter Salary > 5000 Screenshot">
+    <div class="screenshot-caption">Screenshot 1.3: Verification of FILTER emp BY salary > 5000 returning high-earning employee records</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.3:</strong>
+    The <code>FILTER</code> operator applies a predicate condition (<code>salary > 5000</code>). Employees John (5000) and Bob (4500) are excluded. The terminal displays the remaining 5 qualifying records: Alice (7000.0), Charlie (9000.0), David (6200.0), Emma (8500.0), and Frank (5200.0), matching the counter metric <em>"Total records written: 5"</em>.
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 1d & 1e & 1f -->
+  <div class="sub-question">1d. View Details of All Employees in IT Department</div>
+  <pre>d_it_dept = FILTER emp BY dept == 'IT';
+DUMP d_it_dept;</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1d_dept_it.jpg" alt="Pig IT Dept Screenshot">
+    <div class="screenshot-caption">Screenshot 1.4: FILTER emp BY dept == 'IT' isolating IT department staff</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.4:</strong>
+    Filters the dataset strictly for rows matching <code>dept == 'IT'</code>. Job counters record <em>"Total records written: 3"</em>. The output correctly isolates the three IT personnel: <code>(102, Alice, 7000.0, IT)</code>, <code>(104, Charlie, 9000.0, IT)</code>, and <code>(106, Emma, 8500.0, IT)</code>.
+  </div>
+
+  <div class="sub-question">1e. View Details by Incrementing Salary of All Employees by 20%</div>
+  <pre>e_inc = FOREACH emp GENERATE id, name, salary, (salary * 1.2) AS incremented_salary, dept;
+DUMP e_inc;</pre>
+
+  <div class="sub-question">1f. View Employee Details Department-Wise Without Displaying Salary</div>
+  <pre>f_no_salary = FOREACH emp GENERATE dept, id, name;
+DUMP f_no_salary;</pre>
+
+  <!-- 1g -->
+  <div class="sub-question">1g. View Salary Details of Employee in IT Department Only</div>
+  <pre>g_it_salary = FOREACH (FILTER emp BY dept == 'IT') GENERATE id, name, salary;
+DUMP g_it_salary;</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1g_it_salary.jpg" alt="Pig IT Salary Only Screenshot">
+    <div class="screenshot-caption">Screenshot 1.5: Filtering dept == 'IT' and projecting id, name, and salary only</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.5:</strong>
+    Combines predicate filtering with column projection: first filtering records where <code>dept == 'IT'</code>, then generating tuples containing only <code>(id, name, salary)</code>. The resulting output shows: <code>(102, Alice, 7000.0)</code>, <code>(104, Charlie, 9000.0)</code>, and <code>(106, Emma, 8500.0)</code>.
+  </div>
+
+  <!-- 1h -->
+  <div class="sub-question">1h. Sort and View Employee Details by Ascending Order of Salary</div>
+  <pre>h_sorted = ORDER emp BY salary ASC;
+DUMP h_sorted;</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/pig_1h_order_by.jpg" alt="Pig ORDER BY Salary ASC Screenshot">
+    <div class="screenshot-caption">Screenshot 1.6: Verification of ORDER BY salary ASC displaying globally sorted tuples</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 1.6:</strong>
+    The <code>ORDER BY salary ASC</code> statement triggers a complete MapReduce sort phase. The reducer groups and outputs records in strictly ascending salary sequence: Bob (4500.0) &rarr; John (5000.0) &rarr; Frank (5200.0) &rarr; David (6200.0) &rarr; Alice (7000.0) &rarr; Emma (8500.0) &rarr; Charlie (9000.0).
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= PART 2: APACHE HBASE ================= -->
+<div class="program-card">
+  <div class="program-header">
+    <span class="program-num-title">Question 2: Apache HBase Shell Operations</span>
+    <span class="tool-tag">Apache HBase / NoSQL</span>
+  </div>
+  
+  <p><strong>Objective:</strong> Perform non-relational distributed database operations in HBase Shell including table creation with multiple column families, data insertion, cell update, full table scanning, schema inspection, and altering versioning retention.</p>
+
+  <!-- 2a & 2b & 2c -->
+  <div class="sub-question">2a, 2b &amp; 2c. Create 'sales' Table, List Tables, and Insert Data</div>
+  <pre>-- 2a: Create table with column families 'customer' and 'product'
+create 'sales', 'customer', 'product'
+
+-- 2b: Display all tables
+list
+
+-- 2c: Insert rows into sales table
+put 'sales', 'row1', 'customer:name', 'Mohammed'
+put 'sales', 'row1', 'customer:city', 'Bangalore'
+put 'sales', 'row1', 'product:item', 'Laptop'
+put 'sales', 'row1', 'product:price', '65000'
+
+put 'sales', 'row2', 'customer:name', 'Ibrahim'
+put 'sales', 'row2', 'customer:city', 'Bellary'
+put 'sales', 'row2', 'product:item', 'Tablet'
+put 'sales', 'row2', 'product:price', '25000'
+
+put 'sales', 'row3', 'customer:name', 'Rahul'
+put 'sales', 'row3', 'customer:city', 'Mysore'
+put 'sales', 'row3', 'product:item', 'Monitor'
+put 'sales', 'row3', 'product:price', '15000'</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/hbase_2c_insert.jpg" alt="HBase Insert Data Screenshot">
+    <div class="screenshot-caption">Screenshot 2.1: HBase Shell data insertion across row1, row2, and row3 using put commands</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 2.1:</strong>
+    Shows the serial execution of atomic <code>put</code> commands into the <code>sales</code> table. In HBase, each cell is addressed by <code>(RowKey, ColumnFamily:Qualifier, Timestamp)</code>. Data was ingested for rows <code>row1</code>, <code>row2</code>, and <code>row3</code> across column families <code>customer</code> (qualifiers: <code>name</code>, <code>city</code>) and <code>product</code> (qualifiers: <code>item</code>, <code>price</code>). Each operation returned <code>0 row(s) in 0.0xxx seconds</code> confirming immediate write to MemStore and Write-Ahead Log (WAL).
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 2d & 2e -->
+  <div class="sub-question">2d &amp; 2e. Update Value in First Row and Display Contents of Table</div>
+  <pre>-- 2d: Update product:price of row1 from 65000 to 70000
+put 'sales', 'row1', 'product:price', '70000'
+
+-- 2e: Display contents of table
+scan 'sales'</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/hbase_2de_update_scan.jpg" alt="HBase Update and Scan Screenshot">
+    <div class="screenshot-caption">Screenshot 2.2: Verification of cell update (product:price = 70000) and full table scan output</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 2.2:</strong>
+    <ul>
+      <li><strong>Cell Update:</strong> In HBase's append-only architecture, an update is performed by issuing a new <code>put</code> with the identical RowKey (<code>row1</code>) and column (<code>product:price</code>). The new value <code>70000</code> is committed with a higher timestamp (<code>timestamp=1794916963278</code>).</li>
+      <li><strong>Scan Output:</strong> Executing <code>scan 'sales'</code> returns all 3 lexicographically sorted rows. For <code>row1</code>, the latest visible value for <code>product:price</code> is confirmed updated to <code>70000</code>.</li>
+    </ul>
+  </div>
+
+  <!-- 2f -->
+  <div class="sub-question">2f. Display the Structure of the Table</div>
+  <pre>describe 'sales'</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/hbase_2f_describe.jpg" alt="HBase Describe Schema Screenshot">
+    <div class="screenshot-caption">Screenshot 2.3: describe 'sales' displaying column family descriptors and initial VERSIONS => 1</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 2.3:</strong>
+    The <code>describe 'sales'</code> command displays the table metadata: Table status is <code>ENABLED</code>. Two column families are defined: <code>{NAME => 'customer'}</code> and <code>{NAME => 'product'}</code>. By default, both column families are configured with <code>VERSIONS => '1'</code>, <code>TTL => 'FOREVER'</code>, and <code>BLOCKCACHE => 'true'</code>.
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- 2g -->
+  <div class="sub-question">2g. Alter the Schema of the Table by Changing Versions</div>
+  <pre>-- 1. Disable table before schema modification
+disable 'sales'
+
+-- 2. Alter customer column family to retain up to 3 historical versions
+alter 'sales', {NAME => 'customer', VERSIONS => 3}
+
+-- 3. Re-enable table
+enable 'sales'
+
+-- 4. Verify altered schema
+describe 'sales'</pre>
+
+  <div class="screenshot-block">
+    <img src="screenshots_pig_hbase/hbase_2g_alter_versions.jpg" alt="HBase Alter Versions Screenshot">
+    <div class="screenshot-caption">Screenshot 2.4: Execution of disable, alter, enable, and verify VERSIONS => 3 in describe output</div>
+  </div>
+
+  <div class="explanation-card">
+    <strong>Detailed Explanation of Screenshot 2.4 &amp; Technical Significance of Versioning:</strong>
+    <ul>
+      <li><strong>Schema Alteration:</strong> The table was taken offline with <code>disable 'sales'</code>. The command <code>alter 'sales', {NAME => 'customer', VERSIONS => 3}</code> updated the master schema, reporting <em>"Updating all regions with the new schema... Done"</em>. The table was restored online with <code>enable 'sales'</code>.</li>
+      <li><strong>Verification:</strong> Re-running <code>describe 'sales'</code> confirms that the <code>customer</code> column family now has <code>VERSIONS => '3'</code>.</li>
+      <li><strong>How Versioning Helps in HBase / Big Data:</strong>
+        <ol>
+          <li><strong>Historical State Tracking:</strong> HBase does not overwrite data in place; instead, it writes new values with current millisecond timestamps. Retaining 3 versions allows applications to inspect up to 3 prior states of any customer attribute (e.g., historical address or name changes) using <code>get 'sales', 'row1', {COLUMN => 'customer:city', VERSIONS => 3}</code>.</li>
+          <li><strong>Auditability &amp; Rollback:</strong> Enables data auditing and disaster recovery without requiring external change-data-capture (CDC) pipelines.</li>
+          <li><strong>Automatic Garbage Collection:</strong> Any version older than the configured limit (3) is automatically reclaimed and purged during HBase Major Compactions, preventing unbounded HDFS storage bloat.</li>
+        </ol>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= CONCLUSION ================= -->
+<div class="program-card" style="margin-top: 15px;">
+  <div class="program-header">
+    <span class="program-num-title">Conclusion &amp; Summary of Learning Outcomes</span>
+    <span class="tool-tag">Summary</span>
+  </div>
+  <p>Through the successful execution of this practical laboratory assignment, the following competencies were verified:</p>
+  <ul>
+    <li><strong>Apache Pig:</strong> Utilized Pig Latin within the interactive Grunt shell to express high-level data flow transformations (ETL), including schema definition, column projections (<code>FOREACH ... GENERATE</code>), conditional filtering (<code>FILTER</code>), arithmetic transformations, and global sorting (<code>ORDER BY ... ASC</code>).</li>
+    <li><strong>Apache HBase:</strong> Gained hands-on proficiency with a distributed column-oriented NoSQL database, performing table creation across multiple column families, fast write operations (<code>put</code>), point lookups and range scans (<code>scan</code>), and dynamic schema evolution with multi-version concurrency control (<code>alter ... VERSIONS => 3</code>).</li>
+  </ul>
+</div>
+
+</body>
+</html>

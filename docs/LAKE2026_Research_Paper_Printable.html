@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LAKE 2026 Formal Research Paper — Mohammed Ibrahim</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 18mm 20mm 18mm;
+    }
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+      color: #111827;
+      background-color: #f1f5f9;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .paper-container {
+      background: #ffffff;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 24mm 22mm;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-sizing: border-box;
+    }
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .paper-container {
+        width: 100%;
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+    .paper-header {
+      text-align: center;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #0f172a;
+      padding-bottom: 14px;
+    }
+    .paper-conf-tag {
+      font-size: 9pt;
+      font-weight: bold;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+    .paper-title {
+      font-size: 17pt;
+      font-weight: bold;
+      line-height: 1.25;
+      color: #0f172a;
+      text-transform: uppercase;
+      margin: 0 0 12px 0;
+    }
+    .paper-author {
+      font-size: 11.5pt;
+      font-weight: bold;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+    .paper-affil {
+      font-size: 9.5pt;
+      color: #475569;
+      line-height: 1.35;
+    }
+    .paper-affil strong {
+      color: #0f172a;
+    }
+    .paper-columns {
+      column-count: 2;
+      column-gap: 20px;
+      text-align: justify;
+    }
+    h2 {
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #0f172a;
+      border-bottom: 0.8px solid #94a3b8;
+      padding-bottom: 2px;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      break-after: avoid;
+    }
+    h3 {
+      font-size: 10pt;
+      font-weight: bold;
+      color: #1e3a8a;
+      margin-top: 10px;
+      margin-bottom: 3px;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 8px;
+      text-indent: 14px;
+    }
+    .no-indent {
+      text-indent: 0 !important;
+    }
+    .abstract-box {
+      background: #f8fafc;
+      border-left: 3.5px solid #1e3a8a;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      font-size: 9pt;
+      line-height: 1.4;
+      text-align: justify;
+    }
+    .abstract-title {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #1e3a8a;
+      margin-bottom: 4px;
+      font-size: 9pt;
+    }
+    .keywords-line {
+      margin-top: 6px;
+      font-weight: bold;
+      color: #334155;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin: 10px 0;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 4px 6px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      font-weight: bold;
+      color: #0f172a;
+    }
+    .formula-box {
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      border-radius: 4px;
+      padding: 6px 10px;
+      margin: 8px 0;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 8.5pt;
+      text-align: center;
+    }
+    .table-caption {
+      font-size: 8pt;
+      font-weight: bold;
+      color: #475569;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="paper-container">
+    
+    <!-- Paper Header -->
+    <div class="paper-header">
+      <div class="paper-conf-tag">LAKE 2026: 15th Biennial Lake Symposium &bull; IISc Bangalore &amp; Chanakya University &bull; Paper ID: LAKE2026-BD04</div>
+      <h1 class="paper-title">
+        BIG DATA ANALYTICS OF MULTI-YEAR SENTINEL-2 SATELLITE IMAGERY FOR SEASONAL SURFACE-WATER MONITORING AT ANKASAMUDRA BIRD CONSERVATION RESERVE, KARNATAKA
+      </h1>
+      <div class="paper-author">Mohammed Ibrahim</div>
+      <div class="paper-affil">
+        Programme: <strong>BCA (Honours) — Data Science</strong> &bull; School of Engineering, <strong>Chanakya University</strong>, Bengaluru, India<br>
+        In collaboration with: <strong>Energy and Wetlands Research Group (EWRG)</strong>, Centre for Ecological Sciences, <strong>Indian Institute of Science (IISc)</strong>, Bangalore
+      </div>
+    </div>
+
+    <!-- Executive Abstract Box (Spans Top) -->
+    <div class="abstract-box">
+      <div class="abstract-title">Abstract</div>
+      Semi-arid irrigation tanks (<em>keres</em>) in peninsular India serve as vital micro-refugia for migratory waterbirds but undergo extreme seasonal drawdowns from pre-monsoon drying to sudden monsoon filling. Standard satellite remote sensing assessments frequently rely on single-date acquisitions that overlook rapid intra-annual fluctuations. Furthermore, processing multi-temporal, multi-spectral satellite imagery at 10m spatial resolution introduces severe out-of-memory (OOM) compute bottlenecks when using conventional single-node geospatial tools. In this investigation, we engineer a distributed Big Data analytics framework leveraging Apache PySpark and Copernicus Sentinel-2 MSI Level-2A surface reflectance data across 2018–2025 at Ankasamudra Bird Conservation Reserve (Ramsar Site No. 2535, Karnataka). Within a rigorous 97.82-hectare Operational Study-Area Boundary (OSAB v1.0), multi-spectral bands are partitioned into columnar Apache Parquet datasets. Distributed transformations calculate NDWI, MNDWI, and NDVI across 1.2M+ pixel records. Benchmarks demonstrate that PySpark achieves a 13.38&times; speedup (8.4s vs 112.4s) over single-node Pandas execution. Derived inundation profiles indicate that maintaining an active minimum pool depth threshold (>20.0 ha) during March–May via Tungabhadra lift canal releases is essential to avert colonial breeding colony abandonment.
+      <div class="keywords-line">Keywords: Big Data, Apache PySpark, Sentinel-2, Wetland Hydrology, Remote Sensing, Ankasamudra Reserve, Ramsar Site 2535.</div>
+    </div>
+
+    <!-- Two-Column Academic Layout -->
+    <div class="paper-columns">
+      
+      <h2>1. Introduction</h2>
+      <p>
+        Wetlands in semi-arid Karnataka represent fragile hydrologic ecosystems that sustain intense avifaunal biodiversity. Ankasamudra Bird Conservation Reserve (Survey No. 203, Hagaribommanahalli taluk, Vijayanagara district; Ramsar Site No. 2535) is an ecologically vital tank harboring over 210 vascular plant species and colonial breeding waterbirds, notably Painted Storks (<em>Mycteria leucocephala</em>) and Spot-billed Pelicans (<em>Pelecanus philippensis</em>).
+      </p>
+      <p>
+        Despite its statutory significance, the tank suffers from severe intra-annual water fluctuations. Traditional monitoring suffers from two major deficiencies: (1) manual, static GIS observations fail to capture monthly drawdown cadences, and (2) conventional Python/Pandas workflows crash due to out-of-memory (OOM) constraints when aggregating multi-year 10m satellite arrays. This project demonstrates an original distributed PySpark pipeline to resolve these computational and conservation bottlenecks.
+      </p>
+
+      <h2>2. Study Area &amp; Boundary Rigour</h2>
+      <p>
+        The official gazetted area of Ankasamudra Reserve is 98.76 ha. To eliminate spatial error from the adjacent Tungabhadra river backwaters, we defined an <strong>Operational Study-Area Boundary (OSAB v1.0, 97.82 ha)</strong> with a >900m exclusion buffer from river backwaters, isolating the core tank basin for reliable waterbody accounting.
+      </p>
+
+      <h2>3. Big Data PySpark Methodology</h2>
+      <p>
+        The pipeline ingests European Space Agency (ESA) Copernicus Sentinel-2 Level-2A Bottom-Of-Atmosphere (BOA) granules across 2018–2025. SCL cloud masks are applied to eliminate cloud shadow, cirrus, and saturated pixels.
+      </p>
+      <p>
+        Pixel matrices are ingested into Apache PySpark Resilient Distributed Datasets (RDDs) and converted to columnar DataFrames stored in Apache Parquet format partitioned by <code>Year</code> and <code>Season</code>.
+      </p>
+
+      <h3>Spectral Formulations</h3>
+      <div class="formula-box">
+        NDWI = (B3 - B8) / (B3 + B8)<br>
+        MNDWI = (B3 - B11) / (B3 + B11)<br>
+        NDVI = (B8 - B4) / (B8 + B4)
+      </div>
+      <p class="no-indent">
+        Where B3 is Green (560nm), B4 is Red (665nm), B8 is NIR (842nm), and B11 is SWIR (1610nm). MNDWI eliminates soil/bund noise, while NDVI isolates <em>Acacia nilotica</em> tree canopy.
+      </p>
+
+      <h2>4. Results &amp; Benchmarks</h2>
+      <p>
+        Distributed Catalyst optimization achieved massive runtime reductions over single-threaded execution on 1.2M+ pixel records:
+      </p>
+
+      <div class="table-caption">Table 1: Computational Latency Benchmarks</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Framework</th>
+            <th>Time</th>
+            <th>Speedup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pandas (1 Core)</td>
+            <td>112.4 s</td>
+            <td>1.00&times; (Base)</td>
+          </tr>
+          <tr>
+            <td>PySpark (4 Cores)</td>
+            <td>42.1 s</td>
+            <td>2.67&times;</td>
+          </tr>
+          <tr>
+            <td>PySpark Cluster (SIMD)</td>
+            <td><strong>8.4 s</strong></td>
+            <td><strong>13.38&times;</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Habitat Biome Partitioning</h3>
+      <p>
+        Analysis within the 97.82 ha boundary establishes:
+      </p>
+      <p class="no-indent">
+        &bull; <strong>Open Water Surface:</strong> 48% (46.95 ha median)<br>
+        &bull; <strong>Acacia Nesting Canopy:</strong> 36% (35.21 ha)<br>
+        &bull; <strong>Mudflats &amp; Tank Bund:</strong> 16% (15.65 ha)
+      </p>
+
+      <h2>5. Conservation Policy</h2>
+      <p>
+        The time-series hydrological inundation curves reveal that pre-monsoon drying frequently drops water extent below 10 hectares, forcing premature nesting abandonment. We establish a mandatory conservation threshold: <strong>maintaining >20.0 ha of open water during March–May</strong> via scheduled Tungabhadra lift canal feeder releases.
+      </p>
+
+      <h2>6. References</h2>
+      <p class="no-indent" style="font-size: 8pt; line-height: 1.35;">
+        [1] Ramsar RIS: Site 2535, Ankasamudra Reserve, 2024.<br>
+        [2] McFeeters, S. K. (1996). <em>Int. J. Remote Sens.</em>, 17(7).<br>
+        [3] Xu, H. (2006). <em>Int. J. Remote Sens.</em>, 27(14).<br>
+        [4] Zaharia, M., et al. (2016). <em>CACM</em>, 59(11).<br>
+        [5] Mendeley Data: Floristic Inventory, doi:10.17632/8jd5zsf8m9.1.
+      </p>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+
